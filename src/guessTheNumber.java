@@ -10,41 +10,52 @@ public class guessTheNumber {
         int guessCounter = 0;
         int randomInt = (int) Math.floor(Math.random() * (max - min + min) + min); // create a random num between 1 - 20;
         System.out.println("this is the random int: //" + randomInt);
+
         System.out.println("Hello! welcome to guess the number. What is your name?");
         String userInPut = myNameObj.nextLine();
-        // Boolean loopAgain = false;
-        // if(guessObj!= null && guessObjIntValue !=0){
-        System.out.println("Great " + userInPut + " we are about to have some fun. \nWell, " + userInPut + ", " +
-                "I am thinking of a number between 1 and 20 \nTake a guess.");
-        String guessObj = myGuessObj.nextLine();
-        guessCounter++;
+        int x = 1;
+        do {
+            try {
+                System.out.println("Great " + userInPut + " we are about to have some fun. \nWell, " + userInPut + ", " +
+                        "I am thinking of a number between 1 and 20 \nTake a guess.");
+                String guessObj = myGuessObj.nextLine();
+                guessCounter++;
 
-        while (true) {
-            int guessObjIntValue = Integer.parseInt(String.valueOf(guessObj)); // store userObj as int
-            if (guessObjIntValue == randomInt) {
-                System.out.println("Good job, " + userInPut + "! you guessed my number in " + guessCounter +
-                        " guesses. \n" +
-                        "Would you like to play again?(Y/N)");
-                String userPickValue = userPick.nextLine();
-                if (userPickValue.equals("Y") || userPickValue.equals("y")) {
-                    randomInt = (int) Math.floor(Math.random() * (max - min + min) + min);
-                    System.out.println("new random int: " + randomInt);
-                    System.out.println("Make a guess");
-                    guessObj = myGuessObj.nextLine();
-                    guessCounter++;
-                } else if (userPickValue.equals("N") || userPickValue.equals("n")) { // if userPickValue equal N or n end game
-                    break;
+                while (true) {
+                    int guessObjIntValue = Integer.parseInt(String.valueOf(guessObj)); // store userObj as int
+                    if (guessObjIntValue == randomInt) {
+                        System.out.println("Good job, " + userInPut + "! you guessed my number in " + guessCounter +
+                                " guesses. \n" +
+                                "Would you like to play again?(Y/N)");
+                        String userPickValue = userPick.nextLine();
+                        if (userPickValue.equals("Y") || userPickValue.equals("y")) {
+                            randomInt = (int) Math.floor(Math.random() * (max - min + min) + min);
+                            System.out.println("new random int: " + randomInt);
+                            System.out.println("Make a guess");
+                            guessObj = myGuessObj.nextLine();
+                            guessCounter++;
+                        } else if (userPickValue.equals("N") || userPickValue.equals("n")) { // if userPickValue equal N or n end game
+                            System.out.println("Good bye! thanks for playing, come again");
+                            break;
+                        }
+
+                    } else if (guessObjIntValue > randomInt) {
+                        System.out.println("Your guess is too high \nmake a guess");
+                        guessObj = myGuessObj.nextLine();
+                        guessCounter++;
+                    } else {
+                        System.out.println("Your guess is too low \nmake a guess");
+                        guessObj = myGuessObj.nextLine();
+                        guessCounter++;
+                    }
                 }
+                x=2;
 
-            } else if (guessObjIntValue > randomInt) {
-                System.out.println("Your guess is too high \nmake a guess");
-                guessObj = myGuessObj.nextLine();
-                guessCounter++;
-            } else {
-                System.out.println("Your guess is too low \nmake a guess");
-                guessObj = myGuessObj.nextLine();
-                guessCounter++;
+            } catch (Exception e) {
+                System.out.println("Enter a valid number");
             }
-        }
+
+        } while (x == 1);
+
     }
 }
